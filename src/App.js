@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import { Container } from '@mui/material';
 import dayjs from 'dayjs';
@@ -9,25 +9,32 @@ import userAvatar from './public/images/userAvatar.png';
 import { getRandomColor } from './utils/helper';
 
 function App() {
-  const [webinars, setWebinars] = useState([{
-    instructorName: "Matthew Martin",
-    instructorRole: "Lead Front End Developer",
-    instructorCompany: "Google",
-    instructorTopics: "Front End Engineering",
-    instructorAvatar: userAvatar,
-    webinarTitle: "React and React Native",
-    startDate: dayjs().startOf('day'),
-    startTime: dayjs(),
-    endTime: dayjs().add(1, 'hour'),
-    randomColor: getRandomColor()
-  }]);
+  const [webinars, setWebinars] = useState(() => {
+    const savedWebinars = localStorage.getItem('webinars');
+    return savedWebinars ? JSON.parse(savedWebinars) : [{
+      instructorName: "Matthew Martin",
+      instructorRole: "Lead Front End Developer",
+      instructorCompany: "Google",
+      instructorTopics: "Front End Engineering",
+      instructorAvatar: userAvatar,
+      webinarTitle: "React and React Native",
+      startDate: dayjs().startOf('day'),
+      startTime: dayjs(),
+      endTime: dayjs().add(1, 'hour'),
+      randomColor: getRandomColor()
+    }];
+  });
+
   const [open, setOpen] = useState(false);
   const [selectedWebinar, setSelectedWebinar] = useState(null);
   const [search, setSearch] = useState("");
   const [selectedTopic, setSelectedTopic] = useState("");
   const [isEdit, setIsEdit] = useState(false);
 
-  // Handle model toggle
+  useEffect(() => {
+    localStorage.setItem('webinars', JSON.stringify(webinars));
+  }, [webinars]);
+
   const handleOpen = () => {setOpen(true)};
   const handleClose = () => setOpen(false);
 

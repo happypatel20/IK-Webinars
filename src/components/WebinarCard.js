@@ -60,9 +60,6 @@ const WebinarCard = ({ webinar, handleDeleteChild, handleEditChild }) => {
   const webinarStartDay = getDay(date);
   const webinarStartMonthDate = getMonthDate(date);
 
-  getMonthDate(date);
-  getDay(date);
-
   const startTime1 = getTime(new Date(startTime));
   const endTime1 = getTime(new Date(endTime));
 

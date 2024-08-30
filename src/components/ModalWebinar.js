@@ -76,7 +76,6 @@ const ModalWebinar = ({ openChild, handleCloseChild, handleAddWebinarChild, webi
     },
     validationSchema: validationSchema,
     onSubmit: (values, { setSubmitting, resetForm }) => {
-      console.log(values);
       handleCreateWebinar(values);
       resetForm();
       setWebinarAvatar("");
@@ -92,9 +91,9 @@ const ModalWebinar = ({ openChild, handleCloseChild, handleAddWebinarChild, webi
         instructorCompany: webinarChild.instructorCompany || "",
         instructorTopics: webinarChild.instructorTopics || "",
         webinarTitle: webinarChild.webinarTitle || "",
-        startDate: webinarChild.startDate || null,
-        startTime: webinarChild.startTime || null,
-        endTime: webinarChild.endTime || null,
+        startDate: dayjs(webinarChild.startDate) || null,
+        startTime: dayjs(webinarChild.startTime) || null,
+        endTime: dayjs(webinarChild.endTime) || null,
       });
       setWebinarAvatar(webinarChild.instructorAvatar || "");
     }
@@ -378,7 +377,7 @@ const ModalWebinar = ({ openChild, handleCloseChild, handleAddWebinarChild, webi
                 fontSize: theme.typography.customFontSizes.small,
               }}
             >
-              Create webinar
+              {isEditChild ? 'Update' : 'Create'} webinar
             </Button>
             <Button
               onClick={handleCancel}
