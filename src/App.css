@@ -1,0 +1,9 @@
+html {
+  font-size: max(0.833vw, 12px);
+}
+
+@media (max-width: 375.99px) {
+  html {
+    font-size: max(0.700vw, 8px);
+  }
+}
