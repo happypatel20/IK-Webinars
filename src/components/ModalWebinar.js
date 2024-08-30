@@ -101,14 +101,14 @@ const ModalWebinar = ({ openChild, handleCloseChild, handleAddWebinarChild, webi
 
   const handleCreateWebinar = (values) => {
     if (isEditChild) {
-      const updatedWebinars = webinarsChild.map((w) =>
-        w.instructorName === webinarChild.instructorName
+      const updatedWebinars = webinarsChild.map((webinarDetails) =>
+        webinarDetails.instructorName === webinarChild.instructorName
           ? {
-              ...w,
+              ...webinarDetails,
               ...values,
               instructorAvatar: webinarAvatar,
             }
-          : w
+          : webinarDetails
       );
       setWebinarsChild(updatedWebinars);
     } else {
